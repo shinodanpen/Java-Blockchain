@@ -26,13 +26,13 @@ public class Block {
     }
 
     public String mineBlock(int prefix){
-        String prefixString = new String(new char[prefix]).replace('\0', '0');
+        String prefixString = new String(new char[prefix]).replace('\0', 'e');
         while (!hash.substring(0, prefix).equals(prefixString)) {
             nonce++;
-            System.out.println("Mining...");
             hash = calculateHash();
         }
         System.out.println("Block has been mined.");
+        System.out.println("Hash: " + hash);
         return hash;
     }
 

@@ -8,7 +8,7 @@ public class Blockchain {
 
     public static void main(String[] args){
 
-        blockchain.add(new Block("Esempio", "0"));
+        blockchain.add(new Block("Esempio", "start"));
 
         //Let's create some blocks for testing
         int i = 1;
@@ -17,11 +17,13 @@ public class Blockchain {
                     "Esempio "+ i,
                     blockchain.get(blockchain.size() - 1).getHash());
             //Example of block mining
-            int prefix = 1;
-            String prefixString = new String(new char[prefix]).replace('\0', '0');
-
+            int prefix = 3;
             addNewBlock(newBlock.mineBlock(prefix));
-            isBlockchainValid();
+            if(!(isBlockchainValid())){
+                System.err.println("BLOCKCHAIN IS INVALID");
+                return;
+            }
+            i++;
         }
     }
 
