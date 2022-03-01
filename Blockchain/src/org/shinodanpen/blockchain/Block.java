@@ -3,7 +3,6 @@ package org.shinodanpen.blockchain;
 import java.util.Date;
 
 public class Block {
-    private String hash;
     private String prevHash;
     private String blockData;
     private long timestamp;
@@ -14,7 +13,7 @@ public class Block {
         this.prevHash = prevHash;
         this.blockData = blockData;
         this.timestamp =  new Date().getTime();
-        this.hash = calculateHash();
+        calculateHash();
     }
 
     public String calculateHash(){
@@ -26,6 +25,7 @@ public class Block {
     }
 
     public String mineBlock(int prefix){
+        String hash = calculateHash();
         String prefixString = new String(new char[prefix]).replace('\0', 'e');
         while (!hash.substring(0, prefix).equals(prefixString)) {
             nonce++;
@@ -37,7 +37,7 @@ public class Block {
     }
 
     public String getHash() {
-        return hash;
+        return calculateHash();
     }
 
     public String getPrevHash() {
@@ -46,6 +46,10 @@ public class Block {
 
     public String getBlockData() {
         return blockData;
+    }
+
+    public void setBlockData(String blockData) {
+        this.blockData = blockData;
     }
 
     public long getTimestamp() {
